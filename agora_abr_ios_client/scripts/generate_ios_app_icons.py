@@ -40,8 +40,8 @@ def generate_default_source(path: Path) -> None:
     img = Image.new("RGBA", (size, size))
     draw = ImageDraw.Draw(img)
 
-    top = (15, 76, 129)
-    bottom = (27, 138, 90)
+    top = (7, 56, 118)
+    bottom = (0, 142, 152)
     for y in range(size):
         t = y / (size - 1)
         r = int(top[0] * (1 - t) + bottom[0] * t)
@@ -49,21 +49,27 @@ def generate_default_source(path: Path) -> None:
         b = int(top[2] * (1 - t) + bottom[2] * t)
         draw.line([(0, y), (size, y)], fill=(r, g, b, 255))
 
-    inset = 120
-    draw.ellipse(
-        (inset, inset, size - inset, size - inset),
-        outline=(255, 255, 255, 60),
-        width=40,
-    )
+    # Signal rings to emphasize realtime media/network behavior.
+    draw.arc((52, 120, 972, 1040), start=212, end=330, fill=(255, 255, 255, 70), width=34)
+    draw.arc((126, 184, 900, 964), start=214, end=328, fill=(255, 255, 255, 110), width=30)
 
-    draw.arc((160, 260, 864, 964), start=205, end=335, fill=(255, 255, 255, 220), width=56)
-    draw.arc((220, 390, 804, 950), start=205, end=335, fill=(255, 255, 255, 245), width=44)
-    dot = 30
-    center_x, center_y = 512, 724
-    draw.ellipse(
-        (center_x - dot, center_y - dot, center_x + dot, center_y + dot),
-        fill=(255, 255, 255, 255),
-    )
+    # Stylized central A (Agora-inspired).
+    draw.polygon([(512, 190), (760, 810), (664, 810), (592, 620), (432, 620), (360, 810), (264, 810)], fill=(255, 255, 255, 248))
+    draw.polygon([(512, 340), (570, 500), (454, 500)], fill=(0, 126, 144, 255))
+    draw.rectangle((446, 560, 578, 600), fill=(0, 126, 144, 255))
+
+    # ABR layers + adaptive arrows.
+    bar_y = 860
+    bars = [
+        (404, 38, (255, 255, 255, 230)),
+        (466, 50, (255, 255, 255, 245)),
+        (534, 62, (255, 255, 255, 255)),
+    ]
+    for x, h, color in bars:
+        draw.rounded_rectangle((x, bar_y - h, x + 34, bar_y), radius=8, fill=color)
+
+    draw.polygon([(620, 804), (658, 804), (658, 770), (686, 770), (639, 716), (592, 770), (620, 770)], fill=(130, 255, 196, 245))
+    draw.polygon([(338, 740), (376, 740), (376, 774), (404, 774), (357, 828), (310, 774), (338, 774)], fill=(255, 205, 132, 245))
 
     img.save(path, "PNG")
 
@@ -113,6 +119,11 @@ def parse_args() -> argparse.Namespace:
         type=Path,
         help="Path to a source PNG image. If omitted, a default icon is generated.",
     )
+    parser.add_argument(
+        "--use-default",
+        action="store_true",
+        help="Force regeneration from the built-in default icon design.",
+    )
     return parser.parse_args()
 
 
@@ -125,7 +136,9 @@ def main() -> int:
     source_path = appicon_dir / "app-icon-source-1024.png"
     appicon_dir.mkdir(parents=True, exist_ok=True)
 
-    if args.input:
+    if args.use_default:
+        generate_default_source(source_path)
+    elif args.input:
         input_path = args.input.resolve()
         if not input_path.exists():
             raise FileNotFoundError(f"Input file does not exist: {input_path}")

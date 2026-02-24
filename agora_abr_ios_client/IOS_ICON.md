@@ -30,6 +30,13 @@ cd agora_abr_ios_client
 python3 scripts/generate_ios_app_icons.py
 ```
 
+To regenerate using the built-in ABR icon design:
+
+```bash
+cd agora_abr_ios_client
+python3 scripts/generate_ios_app_icons.py --use-default
+```
+
 Or provide a file directly:
 
 ```bash
