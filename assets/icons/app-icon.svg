@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Agora ABR Client Icon">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f4c81" />
+      <stop offset="100%" stop-color="#1b8a5a" />
+    </linearGradient>
+    <linearGradient id="wave" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.95" />
+    </linearGradient>
+  </defs>
+  <rect x="24" y="24" width="464" height="464" rx="104" fill="url(#bg)" />
+  <circle cx="256" cy="256" r="128" fill="none" stroke="#ffffff" stroke-opacity="0.22" stroke-width="22" />
+  <path d="M118 276c36-34 79-52 129-52 53 0 97 19 147 58" fill="none" stroke="url(#wave)" stroke-width="30" stroke-linecap="round" />
+  <path d="M150 332c32-25 66-38 106-38 42 0 79 14 113 43" fill="none" stroke="#ffffff" stroke-width="22" stroke-linecap="round" stroke-opacity="0.92" />
+  <circle cx="256" cy="365" r="15" fill="#ffffff" />
+</svg>

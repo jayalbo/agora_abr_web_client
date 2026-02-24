@@ -32,4 +32,10 @@ Then open:
 - http://localhost:8080
 
 Enter your Agora `App ID`, `Channel`, and optional `Token`, then click **Join**.
+
+## App Icon
+
+- Default icon: `assets/icons/app-icon.svg`
+- PNG replacement instructions: `ICONS.md`
+
 # agora_abr_web_client
