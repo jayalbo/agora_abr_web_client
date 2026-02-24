@@ -1,6 +1,7 @@
 const form = document.getElementById("join-form");
 const appIdInput = document.getElementById("app-id");
 const channelInput = document.getElementById("channel");
+const tokenInput = document.getElementById("token");
 const layerModeSelect = document.getElementById("layer-mode");
 const joinBtn = document.getElementById("join-btn");
 const leaveBtn = document.getElementById("leave-btn");
@@ -13,6 +14,7 @@ if (!AgoraRTCSDK) {
   leaveBtn.disabled = true;
   appIdInput.disabled = true;
   channelInput.disabled = true;
+  tokenInput.disabled = true;
   layerModeSelect.disabled = true;
   logBox.textContent =
     "AgoraRTC SDK failed to load. Check internet access and script URL.";
@@ -46,6 +48,7 @@ function log(message) {
 function setUiState(joined) {
   appIdInput.disabled = joined;
   channelInput.disabled = joined;
+  tokenInput.disabled = joined;
   joinBtn.disabled = joined;
   leaveBtn.disabled = !joined;
 }
@@ -257,6 +260,7 @@ form.addEventListener("submit", async (event) => {
 
   const appId = appIdInput.value.trim();
   const channel = channelInput.value.trim();
+  const token = tokenInput.value.trim();
 
   if (!appId || !channel) {
     log("App ID and channel are required.");
@@ -268,7 +272,7 @@ form.addEventListener("submit", async (event) => {
     enableAbrBandwidthEstimation();
 
     await client.setClientRole("audience");
-    await client.join(appId, channel, null, null);
+    await client.join(appId, channel, token || null, null);
     startRemoteStatsPolling();
     try {
       const defaultType =

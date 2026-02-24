@@ -4,13 +4,13 @@ Simple static web client that joins an Agora channel as an audience user and sub
 
 ## Features
 
-- Inputs for `App ID` and `Channel`
+- Inputs for `App ID`, `Channel`, and optional `Token`
 - `Video Layer` selector:
   - `Auto (ABR)`: prefer high stream and allow fallback to low stream
   - `High`: force high stream
   - `Low`: force low stream
   - `Layer 1` to `Layer 6`: request `RemoteStreamType` layers (`4..9`)
-- Joins without token (`token = null`)
+- Joins with `token` when provided, otherwise `token = null`
 - Receives and plays remote video/audio tracks
 - Enables subscriber-side adaptive bitrate behavior:
   - `AgoraRTC.setParameter("ENABLE_AUT_CC", true)` when available
@@ -31,5 +31,5 @@ Then open:
 
 - http://localhost:8080
 
-Enter your Agora `App ID` and `Channel`, then click **Join**.
+Enter your Agora `App ID`, `Channel`, and optional `Token`, then click **Join**.
 # agora_abr_web_client
