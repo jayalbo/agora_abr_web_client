@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agora AV Subscriber</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://download.agora.io/sdk/release/AgoraRTC_N.js"></script>
+  </head>
+  <body>
+    <main class="app">
+      <h1>Agora AV Subscriber</h1>
+
+      <form id="join-form" class="controls">
+        <label>
+          App ID
+          <input id="app-id" type="text" placeholder="Enter Agora App ID" required />
+        </label>
+
+        <label>
+          Channel
+          <input id="channel" type="text" placeholder="Enter channel name" required />
+        </label>
+
+        <label>
+          Video Layer
+          <select id="layer-mode">
+            <option value="auto" selected>Auto (ABR)</option>
+            <option value="0">High</option>
+            <option value="1">Low</option>
+            <option value="4">Layer 1</option>
+            <option value="5">Layer 2</option>
+            <option value="6">Layer 3</option>
+            <option value="7">Layer 4</option>
+            <option value="8">Layer 5</option>
+            <option value="9">Layer 6</option>
+          </select>
+        </label>
+
+        <div class="buttons">
+          <button id="join-btn" type="submit">Join</button>
+          <button id="leave-btn" type="button" disabled>Leave</button>
+        </div>
+      </form>
+
+      <div class="panels">
+        <section>
+          <h2>Remote Video</h2>
+          <div id="video-grid" class="video-grid"></div>
+        </section>
+
+        <section>
+          <h2>Logs</h2>
+          <pre id="log"></pre>
+        </section>
+      </div>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
